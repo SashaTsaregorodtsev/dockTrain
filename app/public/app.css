@@ -1,0 +1,94 @@
+.Main {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.table {
+    display: grid;
+}
+
+.tHeader {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid black;
+}
+
+.tHeadBook {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid black;
+}
+
+.tBodyBook {
+    padding: 15px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid black;
+}
+
+.tBody {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid black;
+}
+
+.dataTable {
+    margin: 5px;
+}
+
+select {
+    width: 200px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.groupAuthors {
+    margin: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.wrapperEditBooks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+.mainEditBooks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dataEdit {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+}
+
+.navBar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(19, 23, 65);
+    height: 50px;
+    margin-bottom: 20px;
+    font-size: 19px;
+    font-family: "Courier New", Courier, monospace;
+}
+.navBar a {
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+}
