@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Authors;
 use App\Models\Books;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -19,24 +20,15 @@ class BookController extends Controller
       $filtredAuth = $req->authors;
       $authros = Authors::get();
       $books = Books::get();
-      $filtredBooks = [];
+      $filtredBooks = $filtredAuth ? Books::whereHas('authors',function(Builder $query) use($filtredAuth){
+            $query->where('authors.id','like',$filtredAuth);
+      })->get() : null;
 
-   if($filtredAuth ){
-      foreach ($books as $bookAuth){
-         if($bookAuth->authors){
-            foreach($bookAuth->authors as $authors){
-               if($authors->initial == $filtredAuth ){
-                  array_push($filtredBooks,$bookAuth);
-               }
-            }
-         }
-      }
-   }
       return view('books.index',
       [
       'books'=>$filtredAuth  ?  $filtredBooks : $books ,
       'authors'=>$authros ,
-      'selected'=>$filtredAuth ? $filtredAuth : false 
+      'selectedAuth'=>$filtredAuth ? $filtredAuth : false 
       ]);
    }
    
@@ -86,6 +78,17 @@ class BookController extends Controller
 
    public function update(Request $req)
    { 
+
+      $req->validate([
+         'name' => 'min:3|required|max:100|alpha',
+         'yearsPublic'=> 'required|min:3|numeric'
+      ],[
+         'name.alpha' => "Поле 'имя' дожно состоять из буквенных символов",
+         'name.max' => "Поле 'имя' дожно состоять максимум из 100 символов",
+         'yearsPublic.min' =>  "Поле 'год издания' дожно состоять из минимум из 3 символов",
+         'name.min' =>  "Поле 'имя' дожно состоять из минимум из 3 символов"
+      ]);
+      
       $book = Books::find($req->id);
       $book->name = $req->name;
       $book->yearsPublic = $req->yearsPublic;

@@ -20,19 +20,19 @@ Route::get('/',[BookController::class,'index']);
 
 Route::controller(AuthorController::class)->group(function(){
     Route::post('/authors/create','store');
-    Route::get('/authors/edit/{id}','indexId')->name('AuthorsIndexId');
-    Route::post('/authors/delete','delete');
+    Route::get('/authors/edit/{id}','indexId');
+    Route::post('/authors/delete/{id}','delete');
     Route::get('/authors', 'index');
-    Route::get('/authors/edit','edit')->name('AuthorsEdit');
-    Route::post('/authors/update/{id}','update')->name('AuthorsUpdate');
+    Route::get('/authors/edit','edit');
+    Route::post('/authors/update/{id}','update');
 });
 
 Route::controller(BookController::class)->group(function(){
     Route::post('/books/create','store');
     Route::get('/books', 'index');
-    Route::get('/books/edit/{id}','indexId')->name('BooksIndexId');
+    Route::get('/books/edit/{id}','indexId');
     Route::get('/books/edit','edit');
-    Route::post('/books/update/{id}','update')->name('BooksUpdate');
-    Route::post('/books/delete','delete');
+    Route::post('/books/update/{id}','update');
+    Route::post('/books/delete/{id}','delete');
 });
 // Route::post('/edit/book',[BookController::class,'store']);

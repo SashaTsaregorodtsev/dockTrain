@@ -4,13 +4,14 @@ services:
     build:
       context: ./docker
       dockerfile: Dockerfile
-    image: book
+    image: travellist
     container_name: app-book
     working_dir: /var/www/app
     volumes:
       - ./app/:/var/www/app
     networks:
-      - book
+      - travellist
+
   db:
     image: mysql:5.7
     container_name: db-book
@@ -20,7 +21,7 @@ services:
     volumes:
       - db:/var/lib/mysql
     networks:
-      - book
+      - travellist
   nginx:
     image: nginx:alpine
     container_name: nginx-book
@@ -30,9 +31,9 @@ services:
       - ./:/var/www
       - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
-      - book
+      - travellist
 networks:
-  book:
+  travellist:
     driver: bridge
 volumes:
   db:

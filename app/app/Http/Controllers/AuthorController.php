@@ -20,7 +20,7 @@ class AuthorController extends Controller
 
    public function store(Request $req)
    {
-      $validatedData = $req->validate([
+      $req->validate([
          'initial'=> 'required|max:100|min:8|alpha'
       ],[
          'initial.alpha'=>'Поле "ФИО" дожно состоять из буквенных символов',
@@ -32,6 +32,12 @@ class AuthorController extends Controller
 
    public function update(Request $req)
    {
+      $req->validate([
+         'initial'=> 'required|max:100|min:8|alpha'
+      ],[
+         'initial.alpha'=>'Поле "ФИО" дожно состоять из буквенных символов',
+         'initial.min'=>'Поле "ФИО" дожно состоять минимум из 8 символов',
+      ]);
       $author = Authors::find($req->id);
       $author->initial = $req->initial;
       $author->save();
